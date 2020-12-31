@@ -1,4 +1,6 @@
-FROM python:3.8.6-alpine3.12 AS builder
+# Can't use named layes "FROM ... AS builder" because
+# https://stackoverflow.com/a/62031810/360390
+FROM python:3.8.6-alpine3.12
 
 # For the idea of why and how, please read:
 # https://tech.zarmory.com/2018/09/docker-multi-stage-builds-for-python-app.html
@@ -42,7 +44,7 @@ RUN ln -s $PYROOT/lib/python* $PYROOT/lib/python
 ##################
 # The final image
 ##################
-FROM haizaar/python-minimal:3.8.6-alpine3.12-1 AS runner
+FROM haizaar/python-minimal:3.8.6-alpine3.12-1
 
 # Our app does not run as root
 # Do not use USER - hard to obtain root from kubectl exec
@@ -54,8 +56,8 @@ ENV PATH $PYROOT/bin:$PATH
 ENV PYTHONUSERBASE $PYROOT
 
 # Finally, copy artifacts
-COPY --from=builder $PYROOT/lib/ $PYROOT/lib/
-COPY --from=builder $PYROOT/bin/ $PYROOT/bin/
+COPY --from=0 $PYROOT/lib/ $PYROOT/lib/
+COPY --from=0 $PYROOT/bin/ $PYROOT/bin/
 
 WORKDIR /app
 COPY ebs_docker ./
