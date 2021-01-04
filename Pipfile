@@ -9,6 +9,7 @@ awsebcli = "*"
 [packages]
 django = "*"
 gunicorn = "*"
+celery = "*"
 
 [requires]
 python_version = "3.8"

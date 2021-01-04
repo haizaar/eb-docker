@@ -1,5 +1,17 @@
 #!/bin/sh
 
-# need to run celery here
+trap 'kill $CELERY_PID $WEB_PID' EXIT
 
-exec gunicorn --bind=0.0.0.0:8000 --threads=25 ebs_docker.wsgi
+start_celery() {
+	while true; do
+		celery -A ebs_docker worker -l INFO
+	done
+}
+
+start_celery &
+CELERY_PID=$!
+
+gunicorn --bind=0.0.0.0:8000 --threads=25 ebs_docker.wsgi &
+WEB_PID=$1
+
+wait
