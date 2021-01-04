@@ -60,7 +60,7 @@ COPY --from=0 $PYROOT/lib/ $PYROOT/lib/
 COPY --from=0 $PYROOT/bin/ $PYROOT/bin/
 
 WORKDIR /app
-COPY ebs_docker ./
+COPY eb_docker ./
 
 EXPOSE 8000
 

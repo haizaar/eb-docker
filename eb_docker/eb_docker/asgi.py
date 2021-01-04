@@ -1,5 +1,5 @@
 """
-ASGI config for ebs_docker project.
+ASGI config for eb_docker project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ebs_docker.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eb_docker.settings')
 
 application = get_asgi_application()

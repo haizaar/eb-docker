@@ -9,21 +9,21 @@ in its simplest form.
 * **Make sure you have recent version of Python 3 (3.6 or later)**
 
 Bootstrap:
-```python
+```console
 pip install --user --upgrade pip
 pip install --user --upgrade pipenv
 ```
 
 Now, in the project directory run:
-```python
+```console
 pipenv install --three
 pipenv shell
 ```
 
 Now deploy the project to AWS Elastic Beanstalk
-```
-eb init -p docker ebs-docker
-eb create ebs-docker-dev --database --min-instances=2
+```console
+eb init -p docker eb-docker
+eb create eb-docker-dev --database --min-instances=2
 eb deploy
 ```
 
